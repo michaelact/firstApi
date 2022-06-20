@@ -1,0 +1,298 @@
+openapi: 3.0.3
+info:
+  title: DEVCODE BE API
+  version: 1.0.0
+servers:
+  - url: http://{{base_url}}
+tags:
+  - name: ACTIVITY
+  - name: TODO
+paths:
+  /activity-groups:
+    get:
+      tags:
+        - ACTIVITY
+      summary: Get all activity groups
+      responses:
+        '200':
+          description: Success get all activity group
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  status:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ActivityGroup'
+    post:
+      tags:
+        - ACTIVITY
+      summary: Create activity group
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrUpdateActivityGroup'
+      responses:
+        '201':
+          description: Success create activity group
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  status:
+                    type: string
+                  data:
+                    $ref: '#/components/schemas/ActivityGroup'
+  /activity-groups/{activityGroupId}:
+    get:
+      tags:
+        - ACTIVITY
+      summary: Get activity group by ID
+      parameters:
+        - name: activityGroupId
+          in: path
+          required: true
+          description: Activity Group ID
+      responses:
+        '200':
+          description: Success get activity group
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  status:
+                    type: string
+                  data:
+                    $ref: '#/components/schemas/ActivityGroup'
+    delete:
+      tags:
+        - ACTIVITY
+      summary: Delete activity group by ID
+      parameters:
+        - name: activityGroupId
+          in: path
+          required: true
+          description: Activity Group ID
+      responses:
+        '201':
+          description: Success delete activity group
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  status:
+                    type: string
+                  data:
+                    $ref: '#/components/schemas/ActivityGroup'
+    patch:
+      tags:
+        - ACTIVITY
+      summary: Update activity group by ID
+      parameters:
+        - name: activityGroupId
+          in: path
+          required: true
+          description: Activity Group ID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrUpdateActivityGroup'
+      responses:
+        '201':
+          description: Success update activity group
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  status:
+                    type: string
+                  data:
+                    $ref: '#/components/schemas/ActivityGroup'
+  /todo-items:
+    get:
+      tags:
+        - TODO
+      summary: Get all todo items
+      responses:
+        '200':
+          description: Success get all todo items
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  status:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TodoItem'
+    post:
+      tags:
+        - TODO
+      summary: Create todo item
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrUpdateTodoItem'
+      responses:
+        '201':
+          description: Success update todo item
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  status:
+                    type: string
+                  data:
+                    $ref: '#/components/schemas/TodoItem'
+  /todo-item/{todoItemId}:
+    get:
+      tags:
+        - TODO
+      summary: Get todo item by ID
+      parameters:
+        - name: todoItemId
+          in: path
+          required: true
+          description: Todo Item ID
+      responses:
+        '200':
+          description: Success get todo item
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  status:
+                    type: string
+                  data:
+                    $ref: '#/components/schemas/TodoItem'
+    delete:
+      tags:
+        - TODO
+      summary: Delete todo item by ID
+      parameters:
+        - name: todoItemId
+          in: path
+          required: true
+          description: Todo Item ID
+      responses:
+        '201':
+          description: Success update todo item
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  status:
+                    type: string
+                  data:
+                    $ref: '#/components/schemas/TodoItem'
+    patch:
+      tags:
+        - TODO
+      summary: Update todo item by ID
+      parameters:
+        - name: todoItemId
+          in: path
+          required: true
+          description: Todo Item ID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrUpdateTodoItem'
+      responses:
+        '201':
+          description: Success update todo item
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  status:
+                    type: string
+                  data:
+                    $ref: '#/components/schemas/TodoItem'
+components:
+  schemas:
+    ActivityGroup:
+      type: object
+      properties:
+        id:
+          type: integer
+        email:
+          type: string
+        title:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        deleted_at:
+          type: string
+    CreateOrUpdateActivityGroup:
+      type: object
+      properties:
+        email:
+          type: string
+        title:
+          type: string
+    TodoItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        activity_group_id:
+          type: integer
+        title:
+          type: string
+        is_active:
+          type: integer
+        priority:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        deleted_at:
+          type: string
+    CreateOrUpdateTodoItem:
+      type: object
+      properties:
+        activity_group_id:
+          type: integer
+        title:
+          type: string

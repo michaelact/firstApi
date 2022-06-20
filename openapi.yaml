@@ -1,0 +1,1062 @@
+openapi: 3.0.0
+info:
+  title: DEVCODE BE API
+  version: 1.0.0
+servers:
+  - url: http://{{base_url}}
+tags:
+  - name: ACTIVITY
+  - name: TODO
+paths:
+  /activity-groups:
+    get:
+      tags:
+        - ACTIVITY
+      summary: Get All
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '217023'
+            ETag:
+              schema:
+                type: string
+                example: W/"34fbf-Be1OuczPZyNuguI5i13ceby7LVQ"
+            Date:
+              schema:
+                type: string
+                example: Tue, 30 Nov 2021 21:45:05 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: Success
+                message: Success
+                data:
+                  - id: 2
+                    email: ad0286a7-bec4-405c-96e2-cd472c18a1e7@skyshi.com
+                    title: coba 4
+                    created_at: '2021-11-30T05:29:24.000Z'
+                    updated_at: '2021-11-30T05:29:24.000Z'
+                    deleted_at: null
+                  - id: 3
+                    email: wow@gmail.com
+                    title: test
+                    created_at: '2021-11-30T08:51:22.000Z'
+                    updated_at: '2021-11-30T08:51:22.000Z'
+                    deleted_at: null
+    post:
+      tags:
+        - ACTIVITY
+      summary: Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: wow@gmail.com
+      responses:
+        '201':
+          description: Created
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '178'
+            ETag:
+              schema:
+                type: string
+                example: W/"b2-5FmzsgzMUXilMXvB5sdXuyL6wNI"
+            Date:
+              schema:
+                type: string
+                example: Wed, 01 Dec 2021 09:23:06 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: Success
+                message: Success
+                data:
+                  created_at: '2021-12-01T09:23:05.825Z'
+                  updated_at: '2021-12-01T09:23:05.826Z'
+                  id: 1188
+                  title: test
+                  email: wow@gmail.com
+        '400':
+          description: Bad Request
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '67'
+            ETag:
+              schema:
+                type: string
+                example: W/"43-zSU6frTcl9gHoYQDTq06JCvAh0o"
+            Date:
+              schema:
+                type: string
+                example: Wed, 01 Dec 2021 09:23:19 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: Bad Request
+                message: title cannot be null
+                data: {}
+  /activity-groups/132:
+    get:
+      tags:
+        - ACTIVITY
+      summary: Get One
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '229'
+            ETag:
+              schema:
+                type: string
+                example: W/"e5-m7C/ei1xhxZvcR7WPUB3REC4Rfo"
+            Date:
+              schema:
+                type: string
+                example: Wed, 01 Dec 2021 09:22:27 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: Success
+                message: Success
+                data:
+                  id: 2
+                  email: ad0286a7-bec4-405c-96e2-cd472c18a1e7@skyshi.com
+                  title: coba 4
+                  created_at: '2021-11-30T05:29:24.000Z'
+                  updated_at: '2021-11-30T05:29:24.000Z'
+                  deleted_at: null
+        '404':
+          description: Not Found
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '79'
+            ETag:
+              schema:
+                type: string
+                example: W/"4f-X1tpbLO8bTFRVKfaxqNep2noZ2U"
+            Date:
+              schema:
+                type: string
+                example: Wed, 01 Dec 2021 09:22:47 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: Not Found
+                message: Activity with ID 8328923 Not Found
+                data: {}
+  /activity-groups/2:
+    delete:
+      tags:
+        - ACTIVITY
+      summary: Delete
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '50'
+            ETag:
+              schema:
+                type: string
+                example: W/"32-xh+/pf6fWX8aREte3ywdfdCafcQ"
+            Date:
+              schema:
+                type: string
+                example: Wed, 01 Dec 2021 09:28:14 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: Success
+                message: Success
+                data: {}
+        '404':
+          description: Not Found
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '79'
+            ETag:
+              schema:
+                type: string
+                example: W/"4f-qgnKSrigz/7Wmltk2sFU19H4QEk"
+            Date:
+              schema:
+                type: string
+                example: Wed, 01 Dec 2021 09:28:02 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: Not Found
+                message: Activity with ID 1381738 Not Found
+                data: {}
+  /activity-groups/7329323:
+    patch:
+      tags:
+        - ACTIVITY
+      summary: Update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                title: testing
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '230'
+            ETag:
+              schema:
+                type: string
+                example: W/"e6-mqw3HnQfQVaOnHl8PkMk71MwTfg"
+            Date:
+              schema:
+                type: string
+                example: Wed, 01 Dec 2021 09:23:57 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: Success
+                message: Success
+                data:
+                  id: 2
+                  email: ad0286a7-bec4-405c-96e2-cd472c18a1e7@skyshi.com
+                  title: testing
+                  created_at: '2021-11-30T05:29:24.000Z'
+                  updated_at: '2021-12-01T09:23:56.945Z'
+                  deleted_at: null
+        '400':
+          description: Bad Request
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '67'
+            ETag:
+              schema:
+                type: string
+                example: W/"43-zSU6frTcl9gHoYQDTq06JCvAh0o"
+            Date:
+              schema:
+                type: string
+                example: Wed, 01 Dec 2021 09:26:55 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: Bad Request
+                message: title cannot be null
+                data: {}
+        '404':
+          description: Not Found
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '79'
+            ETag:
+              schema:
+                type: string
+                example: W/"4f-O4NFMVLayndESb0e9APvjWGE/pU"
+            Date:
+              schema:
+                type: string
+                example: Wed, 01 Dec 2021 09:27:28 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: Not Found
+                message: Activity with ID 7329323 Not Found
+                data: {}
+  /todo-items:
+    get:
+      tags:
+        - TODO
+      summary: Get All
+      parameters:
+        - name: activity_group_id
+          in: query
+          schema:
+            type: integer
+          example: '999999'
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '424'
+            ETag:
+              schema:
+                type: string
+                example: W/"1a8-LUXpko9eeImTS7l8RHbS2lSLw/Q"
+            Date:
+              schema:
+                type: string
+                example: Wed, 01 Dec 2021 09:30:43 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                example-0:
+                  summary: SUCCESS (without query)
+                  value:
+                    status: Success
+                    message: Success
+                    data:
+                      - id: 1
+                        activity_group_id: '2'
+                        title: item1
+                        is_active: '1'
+                        priority: very-high
+                        created_at: '2021-11-30T18:09:19.000Z'
+                        updated_at: '2021-11-30T20:23:12.000Z'
+                        deleted_at: null
+                      - id: 3
+                        activity_group_id: '1180'
+                        title: item1
+                        is_active: '1'
+                        priority: very-high
+                        created_at: '2021-11-30T20:34:56.000Z'
+                        updated_at: '2021-11-30T20:34:57.000Z'
+                        deleted_at: null
+                example-1:
+                  summary: SUCCESS (with query)
+                  value:
+                    status: Success
+                    message: Success
+                    data:
+                      - id: 1
+                        activity_group_id: '2'
+                        title: item1
+                        is_active: '1'
+                        priority: very-high
+                        created_at: '2021-11-30T18:09:19.000Z'
+                        updated_at: '2021-11-30T20:23:12.000Z'
+                        deleted_at: null
+    post:
+      tags:
+        - TODO
+      summary: Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                title: item 5.4
+      responses:
+        '201':
+          description: Created
+          headers:
+            Server:
+              schema:
+                type: string
+                example: Cowboy
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '218'
+            Etag:
+              schema:
+                type: string
+                example: W/"da-xXBPprgiPjnVCRer+I8m3LUGFO4"
+            Date:
+              schema:
+                type: string
+                example: Thu, 09 Dec 2021 02:00:00 GMT
+            Via:
+              schema:
+                type: number
+                example: 1.1 vegur
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: Success
+                message: Success
+                data:
+                  created_at: '2021-12-09T02:00:00.067Z'
+                  updated_at: '2021-12-09T02:00:00.068Z'
+                  id: 30
+                  title: item 5.4
+                  activity_group_id: 3
+                  is_active: true
+                  priority: very-high
+        '400':
+          description: Bad Request
+          headers:
+            Server:
+              schema:
+                type: string
+                example: Cowboy
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '67'
+            Etag:
+              schema:
+                type: string
+                example: W/"43-zSU6frTcl9gHoYQDTq06JCvAh0o"
+            Date:
+              schema:
+                type: string
+                example: Thu, 09 Dec 2021 02:04:25 GMT
+            Via:
+              schema:
+                type: number
+                example: 1.1 vegur
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                example-0:
+                  summary: FAILED (title blank)
+                  value:
+                    status: Bad Request
+                    message: title cannot be null
+                    data: {}
+                example-1:
+                  summary: FAILED (activity_group_id null)
+                  value:
+                    status: Bad Request
+                    message: activity_group_id cannot be null
+                    data: {}
+  /todo-items/1:
+    get:
+      tags:
+        - TODO
+      summary: Get One
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: Cowboy
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '236'
+            Etag:
+              schema:
+                type: string
+                example: W/"ec-OwHIx4IZrFj/Foeq8LNsGw0Yuwk"
+            Date:
+              schema:
+                type: string
+                example: Thu, 09 Dec 2021 02:22:18 GMT
+            Via:
+              schema:
+                type: number
+                example: 1.1 vegur
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: Success
+                message: Success
+                data:
+                  id: 30
+                  activity_group_id: '3'
+                  title: testing
+                  is_active: '1'
+                  priority: very-high
+                  created_at: '2021-12-09T02:00:00.000Z'
+                  updated_at: '2021-12-09T02:17:15.000Z'
+                  deleted_at: null
+        '404':
+          description: Not Found
+          headers:
+            Server:
+              schema:
+                type: string
+                example: Cowboy
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '74'
+            Etag:
+              schema:
+                type: string
+                example: W/"4a-4d140QkCOGmj8Gr5Tkl+gb0i3gI"
+            Date:
+              schema:
+                type: string
+                example: Thu, 09 Dec 2021 02:22:35 GMT
+            Via:
+              schema:
+                type: number
+                example: 1.1 vegur
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: Not Found
+                message: Todo with ID 999999 Not Found
+                data: {}
+  /todo-items/30:
+    delete:
+      tags:
+        - TODO
+      summary: Delete
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: Cowboy
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '50'
+            Etag:
+              schema:
+                type: string
+                example: W/"32-xh+/pf6fWX8aREte3ywdfdCafcQ"
+            Date:
+              schema:
+                type: string
+                example: Thu, 09 Dec 2021 02:31:31 GMT
+            Via:
+              schema:
+                type: number
+                example: 1.1 vegur
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: Success
+                message: Success
+                data: {}
+        '404':
+          description: Not Found
+          headers:
+            Server:
+              schema:
+                type: string
+                example: Cowboy
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '70'
+            Etag:
+              schema:
+                type: string
+                example: W/"46-ET3GRNEfYixWMV7koVQXb/cjE1w"
+            Date:
+              schema:
+                type: string
+                example: Thu, 09 Dec 2021 02:31:44 GMT
+            Via:
+              schema:
+                type: number
+                example: 1.1 vegur
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: Not Found
+                message: Todo with ID 30 Not Found
+                data: {}
+  /todo-items/999999999:
+    patch:
+      tags:
+        - TODO
+      summary: Update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                is_active: false
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                example: Cowboy
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '236'
+            Etag:
+              schema:
+                type: string
+                example: W/"ec-FLliPV+skDc+3wa8OqNyv0grAY4"
+            Date:
+              schema:
+                type: string
+                example: Thu, 09 Dec 2021 02:14:54 GMT
+            Via:
+              schema:
+                type: number
+                example: 1.1 vegur
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                example-0:
+                  summary: SUCCESS
+                  value:
+                    status: Success
+                    message: Success
+                    data:
+                      id: 30
+                      activity_group_id: '3'
+                      title: testing
+                      is_active: '1'
+                      priority: very-high
+                      created_at: '2021-12-09T02:00:00.000Z'
+                      updated_at: '2021-12-09T02:14:53.993Z'
+                      deleted_at: null
+                example-1:
+                  summary: SUCCESS (status)
+                  value:
+                    status: Success
+                    message: Success
+                    data:
+                      id: 30
+                      activity_group_id: '3'
+                      title: testing
+                      is_active: '1'
+                      priority: very-high
+                      created_at: '2021-12-09T02:00:00.000Z'
+                      updated_at: '2021-12-09T02:17:15.758Z'
+                      deleted_at: null
+        '404':
+          description: Not Found
+          headers:
+            Server:
+              schema:
+                type: string
+                example: Cowboy
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '77'
+            Etag:
+              schema:
+                type: string
+                example: W/"4d-KEogFEIvCz9Ocqp1s98mrSXD0qk"
+            Date:
+              schema:
+                type: string
+                example: Thu, 09 Dec 2021 02:18:38 GMT
+            Via:
+              schema:
+                type: number
+                example: 1.1 vegur
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                status: Not Found
+                message: Todo with ID 999999999 Not Found
+                data: {}
