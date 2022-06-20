@@ -1,0 +1,16 @@
+services:
+  database:
+    image: mysql:8
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'activity'
+      MYSQL_USER: 'dev'
+      MYSQL_PASSWORD: 'HaloPassword138'
+      MYSQL_ROOT_PASSWORD: 'HaloPassword138'
+    ports:
+      - '127.0.0.1:3306:3306'
+    volumes:
+      - dev-db:/var/lib/mysql
+
+volumes:
+  dev-db:
