@@ -1,6 +1,7 @@
 package domain
 
 import (
+	"database/sql"
 	"time"
 )
 
@@ -12,5 +13,5 @@ type Todo struct {
 	Priority        string
 	CreatedAt       time.Time
 	UpdatedAt       time.Time
-	DeletedAt       time.Time
+	DeletedAt       sql.NullTime
 }

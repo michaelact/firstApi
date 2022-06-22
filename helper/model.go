@@ -1,18 +1,25 @@
 package helper
 
 import (
+	"time"
+
 	"github.com/michaelact/firstApi/model/domain"
 	"github.com/michaelact/firstApi/model/web"
 )
 
 func ToActivityResponse(activity domain.Activity) web.ActivityResponse {
+	var deletedAt *time.Time
+	if !activity.DeletedAt.Time.IsZero() {
+		deletedAt = &activity.DeletedAt.Time
+	}
+
 	return web.ActivityResponse{
 		Id:        activity.Id, 
 		Email:     activity.Email, 
 		Title:     activity.Title, 
 		CreatedAt: activity.CreatedAt, 
 		UpdatedAt: activity.UpdatedAt, 
-		DeletedAt: activity.DeletedAt,
+		DeletedAt: deletedAt,
 	}
 }
 
@@ -26,6 +33,11 @@ func ToActivityResponses(listActivity []domain.Activity) []web.ActivityResponse 
 }
 
 func ToTodoResponse(todo domain.Todo) web.TodoResponse {
+	var deletedAt *time.Time
+	if !todo.DeletedAt.Time.IsZero() {
+		deletedAt = &todo.DeletedAt.Time
+	}
+
 	return web.TodoResponse{
 		Id:              todo.Id,
 		ActivityGroupId: todo.ActivityGroupId,
@@ -34,7 +46,7 @@ func ToTodoResponse(todo domain.Todo) web.TodoResponse {
 		Priority:        todo.Priority,
 		CreatedAt:       todo.CreatedAt,
 		UpdatedAt:       todo.UpdatedAt,
-		DeletedAt:       todo.DeletedAt,
+		DeletedAt:       deletedAt,
 	}
 }
 
