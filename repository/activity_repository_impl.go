@@ -79,7 +79,7 @@ func (self *ActivityRepositoryImpl) FindAll(ctx context.Context, tx *sql.Tx) []d
 	defer rows.Close()
 	for rows.Next() {
 		activity := domain.Activity{}
-		err := rows.Scan(&activity.Id, &activity.Email, &activity.CreatedAt, &activity.UpdatedAt, &activity.DeletedAt)
+		err := rows.Scan(&activity.Id, &activity.Title, &activity.Email, &activity.CreatedAt, &activity.UpdatedAt, &activity.DeletedAt)
 		helper.PanicIfError(err)
 
 		listActivity = append(listActivity, activity)
