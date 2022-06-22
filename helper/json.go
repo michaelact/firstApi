@@ -20,11 +20,11 @@ func WriteToResponseBody(res http.ResponseWriter, result interface{}) {
 	PanicIfError(err)
 }
 
-func WriteToResponseBodyError(res http.ResponseWriter, code int, err error) {
+func WriteToResponseBodyError(res http.ResponseWriter, code int, err string) {
 	res.WriteHeader(code)
 	webResponse := web.WebResponse{
 		Status:  http.StatusText(code),
-		Message: err.Error(),
+		Message: err,
 	}
 
 	WriteToResponseBody(res, webResponse)
