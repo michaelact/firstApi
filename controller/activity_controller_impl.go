@@ -2,12 +2,12 @@ package controller
 
 import (
 	"strconv"
-    "net/http"
-    "github.com/julienschmidt/httprouter"
+	"net/http"
+	"github.com/julienschmidt/httprouter"
 
-    "github.com/michaelact/firstApi/model/web"
-    "github.com/michaelact/firstApi/service"
-    "github.com/michaelact/firstApi/helper"
+	"github.com/michaelact/firstApi/model/web"
+	"github.com/michaelact/firstApi/service"
+	"github.com/michaelact/firstApi/helper"
 )
 
 type ActivityControllerImpl struct {
