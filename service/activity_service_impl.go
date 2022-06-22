@@ -1,6 +1,7 @@
 package service
 
 import (
+	"database/sql"
 	"context"
 
 	"github.com/go-playground/validator/v10"
@@ -8,15 +9,16 @@ import (
 	"github.com/michaelact/firstApi/model/domain"
 	"github.com/michaelact/firstApi/repository"
 	"github.com/michaelact/firstApi/model/web"
+	"github.com/michaelact/firstApi/helper"
 )
 
 type ActivityServiceImpl struct {
 	ActivityRepository repository.ActivityRepository
 	DB                 *sql.DB
-	Validate           validator.Validate
+	Validate           *validator.Validate
 }
 
-func NewActivityService(activityRepository repository.ActivityRepository, db *SQL.DB, validate validator.Validate) ActivityService {
+func NewActivityService(activityRepository repository.ActivityRepository, db *sql.DB, validate *validator.Validate) ActivityService {
 	return &ActivityServiceImpl{
 		ActivityRepository: activityRepository, 
 		DB:                 db, 
@@ -41,7 +43,7 @@ func (self *ActivityServiceImpl) Create(ctx context.Context, request web.Activit
 	return helper.ToActivityResponse(activity)
 }
 
-func (self *ActivityServiceImpl) Update(ctx context.Context, request web.ActivityCreateRequest) web.ActivityResponse {
+func (self *ActivityServiceImpl) Update(ctx context.Context, request web.ActivityUpdateRequest) web.ActivityResponse {
 	err := self.Validate.Struct(request)
 	helper.PanicIfError(err)
 	
@@ -56,7 +58,7 @@ func (self *ActivityServiceImpl) Update(ctx context.Context, request web.Activit
 	// Update existing activity
 	activity.Email = request.Email
 	activity.Title = request.Title
-	activity = service.ActivityRepository.Update(ctx, tx, activity)
+	activity = self.ActivityRepository.Update(ctx, tx, activity)
 	return helper.ToActivityResponse(activity)
 }
 
@@ -66,11 +68,11 @@ func (self *ActivityServiceImpl) Delete(ctx context.Context, id int) {
 	defer helper.CommitOrRollback(tx)
 
 	// Fail if existing activity not found
-	activity, err := self.ActivityRepository.FindById(ctx, tx, id)
+	_, err = self.ActivityRepository.FindById(ctx, tx, id)
 	helper.PanicIfError(err)
 
 	// Delete existing activity
-	service.ActivityRepository.Delete(ctx, tx, id)
+	self.ActivityRepository.Delete(ctx, tx, id)
 }
 
 func (self *ActivityServiceImpl) FindById(ctx context.Context, id int) web.ActivityResponse {
@@ -90,6 +92,6 @@ func (self *ActivityServiceImpl) FindAll(ctx context.Context) []web.ActivityResp
 	helper.PanicIfError(err)
 	defer helper.CommitOrRollback(tx)
 
-	listActivity, err := self.ActivityRepository.FindAll(ctx, tx)
+	listActivity := self.ActivityRepository.FindAll(ctx, tx)
 	return helper.ToActivityResponses(listActivity)
 }

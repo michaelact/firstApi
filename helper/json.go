@@ -13,6 +13,6 @@ func ReadFromRequestBody(req *http.Request, result interface{}) {
 
 func WriteToResponseBody(res http.ResponseWriter, result interface{}) {
 	encoder := json.NewEncoder(res)
-	err = encoder.Encode(&result)
+	err := encoder.Encode(&result)
 	PanicIfError(err)
 }

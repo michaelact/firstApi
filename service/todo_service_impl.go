@@ -1,6 +1,7 @@
 package service
 
 import (
+	"database/sql"
 	"context"
 
 	"github.com/go-playground/validator/v10"
@@ -8,15 +9,16 @@ import (
 	"github.com/michaelact/firstApi/model/domain"
 	"github.com/michaelact/firstApi/repository"
 	"github.com/michaelact/firstApi/model/web"
+	"github.com/michaelact/firstApi/helper"
 )
 
 type TodoServiceImpl struct {
 	TodoRepository repository.TodoRepository
 	DB             *sql.DB
-	Validate       validator.Validate
+	Validate       *validator.Validate
 }
 
-func NewTodoService(todoRepository repository.TodoRepository, db *SQL.DB, validate validator.Validate) TodoService {
+func NewTodoService(todoRepository repository.TodoRepository, db *sql.DB, validate *validator.Validate) TodoService {
 	return &TodoServiceImpl{
 		TodoRepository: todoRepository, 
 		DB:             db, 
@@ -41,7 +43,7 @@ func (self *TodoServiceImpl) Create(ctx context.Context, request web.TodoCreateR
 	return helper.ToTodoResponse(todo)
 }
 
-func (self *TodoServiceImpl) Update(ctx context.Context, request web.TodoCreateRequest) web.TodoResponse {
+func (self *TodoServiceImpl) Update(ctx context.Context, request web.TodoUpdateRequest) web.TodoResponse {
 	err := self.Validate.Struct(request)
 	helper.PanicIfError(err)
 	
@@ -66,7 +68,7 @@ func (self *TodoServiceImpl) Delete(ctx context.Context, id int) {
 	defer helper.CommitOrRollback(tx)
 
 	// Fail if existing todo not found
-	todo, err := self.TodoRepository.FindById(ctx, tx, id)
+	_, err = self.TodoRepository.FindById(ctx, tx, id)
 	helper.PanicIfError(err)
 
 	// Delete existing todo
@@ -90,6 +92,6 @@ func (self *TodoServiceImpl) FindAll(ctx context.Context) []web.TodoResponse {
 	helper.PanicIfError(err)
 	defer helper.CommitOrRollback(tx)
 
-	listTodo, err := self.TodoRepository.FindAll(ctx, tx)
+	listTodo := self.TodoRepository.FindAll(ctx, tx)
 	return helper.ToTodoResponses(listTodo)
 }

@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"database/sql"
 	"context"
 
 	"github.com/michaelact/firstApi/model/domain"

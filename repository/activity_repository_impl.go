@@ -45,7 +45,7 @@ func (self *ActivityRepositoryImpl) Update(ctx context.Context, tx *sql.Tx, acti
 func (self *ActivityRepositoryImpl) Delete(ctx context.Context, tx *sql.Tx, id int) {
 	// Delete existing activity
 	SQLDel := "DELETE FROM Activity WHERE id=?"	
-	result, err := tx.ExecContext(ctx, SQLDel, id)
+	_, err := tx.ExecContext(ctx, SQLDel, id)
 	helper.PanicIfError(err)
 }
 
@@ -56,7 +56,7 @@ func (self *ActivityRepositoryImpl) FindById(ctx context.Context, tx *sql.Tx, id
 	helper.PanicIfError(err)
 
 	// Bind all columns value to activity variable
-	activity := new(domain.Activity)
+	activity := domain.Activity{}
 	activity.Id = id
 	defer rows.Close()
 	if rows.Next() {
@@ -68,17 +68,17 @@ func (self *ActivityRepositoryImpl) FindById(ctx context.Context, tx *sql.Tx, id
 	}
 }
 
-func (self *ActivityRepositoryImpl) FindAll(ctx context.Context, tx *sql.Tx, activity domain.Activity) []domain.Activity {
+func (self *ActivityRepositoryImpl) FindAll(ctx context.Context, tx *sql.Tx) []domain.Activity {
 	// Extract all activity
 	SQLGet := "SELECT id, title, email, created_at, updated_at, deleted_at FROM Activity"
-	rows, err := tx.QueryContext(ctx. SQLGet)
+	rows, err := tx.QueryContext(ctx, SQLGet)
 	helper.PanicIfError(err)
 
 	// Iterate all extracted rows
 	var listActivity []domain.Activity
 	defer rows.Close()
 	for rows.Next() {
-		activity := new(domain.Activity)
+		activity := domain.Activity{}
 		err := rows.Scan(&activity.Id, &activity.Email, &activity.CreatedAt, &activity.UpdatedAt, &activity.DeletedAt)
 		helper.PanicIfError(err)
 

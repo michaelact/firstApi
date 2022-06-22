@@ -18,6 +18,7 @@ type TodoUpdateRequest struct {
 type TodoResponse struct {
 	Id              int
 	ActivityGroupId int
+	Title           string
 	IsActive        bool
 	Priority        string
 	CreatedAt       time.Time

@@ -1,11 +1,13 @@
 package controller
 
 import (
+	"strconv"
     "net/http"
     "github.com/julienschmidt/httprouter"
 
     "github.com/michaelact/firstApi/model/web"
     "github.com/michaelact/firstApi/service"
+    "github.com/michaelact/firstApi/helper"
 )
 
 type ActivityControllerImpl struct {
@@ -19,7 +21,7 @@ func NewActivityController(activityService service.ActivityService) ActivityCont
 }
 
 func (self *ActivityControllerImpl) Create(res http.ResponseWriter, req *http.Request, params httprouter.Params) {
-	request := new(web.ActivityCreateRequest)
+	request := web.ActivityCreateRequest{}
 	helper.ReadFromRequestBody(req, &request)
 
 	serviceResponse := self.ActivityService.Create(req.Context(), request)
@@ -33,13 +35,13 @@ func (self *ActivityControllerImpl) Create(res http.ResponseWriter, req *http.Re
 }
 
 func (self *ActivityControllerImpl) Update(res http.ResponseWriter, req *http.Request, params httprouter.Params) {
-	request := new(web.ActivityUpdateRequest)
+	request := web.ActivityUpdateRequest{}
 	helper.ReadFromRequestBody(req, &request)
 
 	// Bind ID from Route Parameter
 	id, err := strconv.Atoi(params.ByName("activityId"))
 	helper.PanicIfError(err)
-	request.Id := id
+	request.Id = id
 
 	serviceResponse := self.ActivityService.Update(req.Context(), request)
 	webResponse := web.WebResponse{

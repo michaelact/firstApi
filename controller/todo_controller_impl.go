@@ -1,11 +1,13 @@
 package controller
 
 import (
+	"strconv"
     "net/http"
     "github.com/julienschmidt/httprouter"
 
     "github.com/michaelact/firstApi/model/web"
     "github.com/michaelact/firstApi/service"
+    "github.com/michaelact/firstApi/helper"
 )
 
 type TodoControllerImpl struct {
@@ -19,7 +21,7 @@ func NewTodoController(todoService service.TodoService) TodoController {
 }
 
 func (self *TodoControllerImpl) Create(res http.ResponseWriter, req *http.Request, params httprouter.Params) {
-	request := new(web.TodoCreateRequest)
+	request := web.TodoCreateRequest{}
 	helper.ReadFromRequestBody(req, &request)
 
 	serviceResponse := self.TodoService.Create(req.Context(), request)
@@ -33,13 +35,13 @@ func (self *TodoControllerImpl) Create(res http.ResponseWriter, req *http.Reques
 }
 
 func (self *TodoControllerImpl) Update(res http.ResponseWriter, req *http.Request, params httprouter.Params) {
-	request := new(web.TodoUpdateRequest)
+	request := web.TodoUpdateRequest{}
 	helper.ReadFromRequestBody(req, &request)
 
 	// Bind ID from Route Parameter
 	id, err := strconv.Atoi(params.ByName("todoId"))
 	helper.PanicIfError(err)
-	request.Id := id
+	request.Id = id
 
 	serviceResponse := self.TodoService.Update(req.Context(), request)
 	webResponse := web.WebResponse{

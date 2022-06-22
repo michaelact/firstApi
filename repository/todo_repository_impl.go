@@ -56,7 +56,7 @@ func (self *TodoRepositoryImpl) FindById(ctx context.Context, tx *sql.Tx, id int
 	helper.PanicIfError(err)
 
 	// Bind all columns value to todo variable
-	todo := new(domain.Todo)
+	todo := domain.Todo{}
 	todo.Id = id
 	defer rows.Close()
 	if rows.Next() {
@@ -68,7 +68,7 @@ func (self *TodoRepositoryImpl) FindById(ctx context.Context, tx *sql.Tx, id int
 	}
 }
 
-func (self *TodoRepositoryImpl) FindAll(ctx context.Context, tx *sql.Tx, todo domain.Todo) []domain.Todo {
+func (self *TodoRepositoryImpl) FindAll(ctx context.Context, tx *sql.Tx) []domain.Todo {
 	// Extract all todolist
 	SQLGet := "SELECT id, activity_group_id, is_active, priority, created_at, updated_at, deleted_at FROM Todo"
 	rows, err := tx.QueryContext(ctx, SQLGet)
@@ -78,7 +78,7 @@ func (self *TodoRepositoryImpl) FindAll(ctx context.Context, tx *sql.Tx, todo do
 	var listTodo []domain.Todo
 	defer rows.Close()
 	for rows.Next() {
-		todo := new(domain.Todo)
+		todo := domain.Todo{}
 		err := rows.Scan(&todo.Id, &todo.ActivityGroupId, &todo.IsActive, &todo.Priority, &todo.CreatedAt,  &todo.UpdatedAt, &todo.DeletedAt)
 		helper.PanicIfError(err)
 
