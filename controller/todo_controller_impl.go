@@ -12,7 +12,7 @@ type TodoControllerImpl struct {
 	TodoService service.TodoService
 }
 
-func NewTodoController(todoService TodoService) TodoController {
+func NewTodoController(todoService service.TodoService) TodoController {
 	return &TodoControllerImpl{
 		TodoService: todoService, 
 	}

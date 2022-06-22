@@ -12,7 +12,7 @@ type ActivityControllerImpl struct {
 	ActivityService service.ActivityService
 }
 
-func NewActivityController(activityService ActivityService) ActivityController {
+func NewActivityController(activityService service.ActivityService) ActivityController {
 	return &ActivityControllerImpl{
 		ActivityService: activityService, 
 	}
