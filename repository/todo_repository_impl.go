@@ -32,7 +32,7 @@ func (self *TodoRepositoryImpl) Save(ctx context.Context, tx *sql.Tx, todo domai
 
 func (self *TodoRepositoryImpl) Update(ctx context.Context, tx *sql.Tx, todo domain.Todo) domain.Todo {
 	// Update existing todo
-	SQLPut := "UPDATE Todo SET activity_group_id=?, title=? WHERE id=?"
+	SQLPut := "UPDATE Todo SET activity_group_id=?, title=?, updated_at=NOW() WHERE id=?"
 	_, err := tx.ExecContext(ctx, SQLPut, todo.ActivityGroupId, todo.Title, todo.Id)
 	helper.PanicIfError(err)
 
@@ -44,7 +44,7 @@ func (self *TodoRepositoryImpl) Update(ctx context.Context, tx *sql.Tx, todo dom
 
 func (self *TodoRepositoryImpl) Delete(ctx context.Context, tx *sql.Tx, id int) {
 	// Delete existing todo
-	SQLDel := "DELETE FROM Todo WHERE id=?"
+	SQLDel := "UPDATE Todo SET deleted_at=NOW()"
 	_, err := tx.ExecContext(ctx, SQLDel, id)
 	helper.PanicIfError(err)
 }

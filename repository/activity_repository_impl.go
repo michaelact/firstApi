@@ -44,7 +44,7 @@ func (self *ActivityRepositoryImpl) Update(ctx context.Context, tx *sql.Tx, acti
 
 func (self *ActivityRepositoryImpl) Delete(ctx context.Context, tx *sql.Tx, id int) {
 	// Delete existing activity
-	SQLDel := "DELETE FROM Activity WHERE id=?"	
+	SQLDel := "UPDATE Activity SET deleted_at=NOW()"	
 	_, err := tx.ExecContext(ctx, SQLDel, id)
 	helper.PanicIfError(err)
 }
