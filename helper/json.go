@@ -12,6 +12,7 @@ func ReadFromRequestBody(req *http.Request, result interface{}) {
 }
 
 func WriteToResponseBody(res http.ResponseWriter, result interface{}) {
+	res.Header().Add("Content-Type", "application/json")
 	encoder := json.NewEncoder(res)
 	err := encoder.Encode(&result)
 	PanicIfError(err)
