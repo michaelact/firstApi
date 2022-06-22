@@ -9,6 +9,7 @@ import (
 	"github.com/michaelact/firstApi/model/domain"
 	"github.com/michaelact/firstApi/repository"
 	"github.com/michaelact/firstApi/model/web"
+	"github.com/michaelact/firstApi/exception"
 	"github.com/michaelact/firstApi/helper"
 )
 
@@ -27,6 +28,7 @@ func NewActivityService(activityRepository repository.ActivityRepository, db *sq
 }
 
 func (self *ActivityServiceImpl) Create(ctx context.Context, request web.ActivityCreateRequest) web.ActivityResponse {
+	// Fail if request is not valid
 	err := self.Validate.Struct(request)
 	helper.PanicIfError(err)
 
@@ -44,6 +46,7 @@ func (self *ActivityServiceImpl) Create(ctx context.Context, request web.Activit
 }
 
 func (self *ActivityServiceImpl) Update(ctx context.Context, request web.ActivityUpdateRequest) web.ActivityResponse {
+	// Fail if request is not valid
 	err := self.Validate.Struct(request)
 	helper.PanicIfError(err)
 	
@@ -53,7 +56,9 @@ func (self *ActivityServiceImpl) Update(ctx context.Context, request web.Activit
 
 	// Fail if existing activity not found
 	activity, err := self.ActivityRepository.FindById(ctx, tx, request.Id)
-	helper.PanicIfError(err)
+	if err != nil {
+		panic(exception.NewNotFoundError(err.Error()))
+	}
 
 	// Update existing activity
 	activity.Email = request.Email
@@ -69,7 +74,9 @@ func (self *ActivityServiceImpl) Delete(ctx context.Context, id int) {
 
 	// Fail if existing activity not found
 	_, err = self.ActivityRepository.FindById(ctx, tx, id)
-	helper.PanicIfError(err)
+	if err != nil {
+		panic(exception.NewNotFoundError(err.Error()))
+	}
 
 	// Delete existing activity
 	self.ActivityRepository.Delete(ctx, tx, id)
@@ -82,7 +89,9 @@ func (self *ActivityServiceImpl) FindById(ctx context.Context, id int) web.Activ
 
 	// Fail if existing activity not found
 	activity, err := self.ActivityRepository.FindById(ctx, tx, id)
-	helper.PanicIfError(err)
+	if err != nil {
+		panic(exception.NewNotFoundError(err.Error()))
+	}
 
 	return helper.ToActivityResponse(activity)
 }

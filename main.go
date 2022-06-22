@@ -10,6 +10,7 @@ import (
 
 	"github.com/michaelact/firstApi/repository"
 	"github.com/michaelact/firstApi/controller"
+	"github.com/michaelact/firstApi/exception"
 	"github.com/michaelact/firstApi/service"
 	"github.com/michaelact/firstApi/helper"
 	"github.com/michaelact/firstApi/app"
@@ -20,6 +21,7 @@ func main() {
 
 	validate := validator.New()
 	router := httprouter.New()
+	router.PanicHandler = exception.ErrorHandler
 
 	// Activity
 	activityRepository := repository.NewActivityRepository()

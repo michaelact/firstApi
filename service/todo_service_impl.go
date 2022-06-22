@@ -9,6 +9,7 @@ import (
 	"github.com/michaelact/firstApi/model/domain"
 	"github.com/michaelact/firstApi/repository"
 	"github.com/michaelact/firstApi/model/web"
+	"github.com/michaelact/firstApi/exception"
 	"github.com/michaelact/firstApi/helper"
 )
 
@@ -27,6 +28,7 @@ func NewTodoService(todoRepository repository.TodoRepository, db *sql.DB, valida
 }
 
 func (self *TodoServiceImpl) Create(ctx context.Context, request web.TodoCreateRequest) web.TodoResponse {
+	// Fail if request is not valid
 	err := self.Validate.Struct(request)
 	helper.PanicIfError(err)
 
@@ -44,6 +46,7 @@ func (self *TodoServiceImpl) Create(ctx context.Context, request web.TodoCreateR
 }
 
 func (self *TodoServiceImpl) Update(ctx context.Context, request web.TodoUpdateRequest) web.TodoResponse {
+	// Fail if request is not valid
 	err := self.Validate.Struct(request)
 	helper.PanicIfError(err)
 	
@@ -53,7 +56,9 @@ func (self *TodoServiceImpl) Update(ctx context.Context, request web.TodoUpdateR
 
 	// Fail if existing todo not found
 	todo, err := self.TodoRepository.FindById(ctx, tx, request.Id)
-	helper.PanicIfError(err)
+	if err != nil {
+		panic(exception.NewNotFoundError(err.Error()))
+	}
 
 	// Update existing todo
 	todo.ActivityGroupId = request.ActivityGroupId
@@ -69,7 +74,9 @@ func (self *TodoServiceImpl) Delete(ctx context.Context, id int) {
 
 	// Fail if existing todo not found
 	_, err = self.TodoRepository.FindById(ctx, tx, id)
-	helper.PanicIfError(err)
+	if err != nil {
+		panic(exception.NewNotFoundError(err.Error()))
+	}
 
 	// Delete existing todo
 	self.TodoRepository.Delete(ctx, tx, id)
@@ -82,7 +89,9 @@ func (self *TodoServiceImpl) FindById(ctx context.Context, id int) web.TodoRespo
 
 	// Fail if existing todo not found
 	todo, err := self.TodoRepository.FindById(ctx, tx, id)
-	helper.PanicIfError(err)
+	if err != nil {
+		panic(exception.NewNotFoundError(err.Error()))
+	}
 
 	return helper.ToTodoResponse(todo)
 }
