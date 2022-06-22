@@ -16,6 +16,14 @@ type TodoServiceImpl struct {
 	Validate       validator.Validate
 }
 
+func NewTodoService(todoRepository repository.TodoRepository, db *SQL.DB, validate validator.Validate) TodoService {
+	return &TodoServiceImpl{
+		TodoRepository: todoRepository, 
+		DB:             db, 
+		Validate:       validate, 
+	}
+}
+
 func (self *TodoServiceImpl) Create(ctx context.Context, request web.TodoCreateRequest) web.TodoResponse {
 	err := self.Validate.Struct(request)
 	helper.PanicIfError(err)

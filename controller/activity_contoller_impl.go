@@ -12,6 +12,12 @@ type ActivityControllerImpl struct {
 	ActivityService service.ActivityService
 }
 
+func NewActivityController(activityService ActivityService) ActivityController {
+	return &ActivityControllerImpl{
+		ActivityService: activityService, 
+	}
+}
+
 func (self *ActivityControllerImpl) Create(res http.ResponseWriter, req *http.Request, params httprouter.Params) {
 	request := new(web.ActivityCreateRequest)
 	helper.ReadFromRequestBody(req, &request)
@@ -31,7 +37,7 @@ func (self *ActivityControllerImpl) Update(res http.ResponseWriter, req *http.Re
 	helper.ReadFromRequestBody(req, &request)
 
 	// Bind ID from Route Parameter
-	id, err := strconv.Atoi(params.ByName("ActivityId"))
+	id, err := strconv.Atoi(params.ByName("activityId"))
 	helper.PanicIfError(err)
 	request.Id := id
 
@@ -46,7 +52,7 @@ func (self *ActivityControllerImpl) Update(res http.ResponseWriter, req *http.Re
 }
 
 func (self *ActivityControllerImpl) Delete(res http.ResponseWriter, req *http.Request, params httprouter.Params) {
-	requestId, err := strconv.Atoi(params.ByName("ActivityId"))
+	requestId, err := strconv.Atoi(params.ByName("activityId"))
 	helper.PanicIfError(err)
 
 	self.ActivityService.Delete(req.Context(), requestId)
@@ -59,7 +65,7 @@ func (self *ActivityControllerImpl) Delete(res http.ResponseWriter, req *http.Re
 }
 
 func (self *ActivityControllerImpl) FindById(res http.ResponseWriter, req *http.Request, params httprouter.Params) {
-	requestId, err := strconv.Atoi(params.ByName("ActivityId"))
+	requestId, err := strconv.Atoi(params.ByName("activityId"))
 	helper.PanicIfError(err)
 
 	serviceResponse := self.ActivityService.FindById(req.Context(), requestId)

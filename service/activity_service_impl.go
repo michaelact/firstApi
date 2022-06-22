@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 
-	"github.com/go-playground/validator"
+	"github.com/go-playground/validator/v10"
 
 	"github.com/michaelact/firstApi/model/domain"
 	"github.com/michaelact/firstApi/repository"
@@ -14,6 +14,14 @@ type ActivityServiceImpl struct {
 	ActivityRepository repository.ActivityRepository
 	DB                 *sql.DB
 	Validate           validator.Validate
+}
+
+func NewActivityService(activityRepository repository.ActivityRepository, db *SQL.DB, validate validator.Validate) ActivityService {
+	return &ActivityServiceImpl{
+		ActivityRepository: activityRepository, 
+		DB:                 db, 
+		Validate:           validate, 
+	}
 }
 
 func (self *ActivityServiceImpl) Create(ctx context.Context, request web.ActivityCreateRequest) web.ActivityResponse {

@@ -10,7 +10,10 @@ import (
 )
 
 type ActivityRepositoryImpl struct {
+}
 
+func NewActivityRepository() ActivityRepository {
+	return &ActivityRepositoryImpl{}
 }
 
 func (self *ActivityRepositoryImpl) Save(ctx context.Context, tx *sql.Tx, activity domain.Activity) domain.Activity {
@@ -21,7 +24,9 @@ func (self *ActivityRepositoryImpl) Save(ctx context.Context, tx *sql.Tx, activi
 
 	// Return created activity
 	id, err := result.LastInsertId()
+	helper.PanicIfError(err)
 	activity, err = self.FindById(ctx, tx, int(id))
+	helper.PanicIfError(err)
 	return activity
 }
 

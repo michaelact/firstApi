@@ -12,6 +12,12 @@ type TodoControllerImpl struct {
 	TodoService service.TodoService
 }
 
+func NewTodoController(todoService TodoService) TodoController {
+	return &TodoControllerImpl{
+		TodoService: todoService, 
+	}
+}
+
 func (self *TodoControllerImpl) Create(res http.ResponseWriter, req *http.Request, params httprouter.Params) {
 	request := new(web.TodoCreateRequest)
 	helper.ReadFromRequestBody(req, &request)
@@ -31,7 +37,7 @@ func (self *TodoControllerImpl) Update(res http.ResponseWriter, req *http.Reques
 	helper.ReadFromRequestBody(req, &request)
 
 	// Bind ID from Route Parameter
-	id, err := strconv.Atoi(params.ByName("TodoId"))
+	id, err := strconv.Atoi(params.ByName("todoId"))
 	helper.PanicIfError(err)
 	request.Id := id
 
@@ -46,7 +52,7 @@ func (self *TodoControllerImpl) Update(res http.ResponseWriter, req *http.Reques
 }
 
 func (self *TodoControllerImpl) Delete(res http.ResponseWriter, req *http.Request, params httprouter.Params) {
-	requestId, err := strconv.Atoi(params.ByName("TodoId"))
+	requestId, err := strconv.Atoi(params.ByName("todoId"))
 	helper.PanicIfError(err)
 
 	self.TodoService.Delete(req.Context(), requestId)
@@ -59,7 +65,7 @@ func (self *TodoControllerImpl) Delete(res http.ResponseWriter, req *http.Reques
 }
 
 func (self *TodoControllerImpl) FindById(res http.ResponseWriter, req *http.Request, params httprouter.Params) {
-	requestId, err := strconv.Atoi(params.ByName("TodoId"))
+	requestId, err := strconv.Atoi(params.ByName("todoId"))
 	helper.PanicIfError(err)
 
 	serviceResponse := self.TodoService.FindById(req.Context(), requestId)

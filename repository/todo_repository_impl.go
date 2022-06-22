@@ -10,7 +10,10 @@ import (
 )
 
 type TodoRepositoryImpl struct {
+}
 
+func NewTodoRepository() TodoRepository {
+	return &TodoRepositoryImpl{}
 }
 
 func (self *TodoRepositoryImpl) Save(ctx context.Context, tx *sql.Tx, todo domain.Todo) domain.Todo {
@@ -23,6 +26,7 @@ func (self *TodoRepositoryImpl) Save(ctx context.Context, tx *sql.Tx, todo domai
 	id, err := result.LastInsertId()
 	helper.PanicIfError(err)
 	todo, err = self.FindById(ctx, tx, int(id))
+	helper.PanicIfError(err)
 	return todo
 }
 
