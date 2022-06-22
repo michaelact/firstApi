@@ -19,30 +19,29 @@ func main() {
 	db := app.ConnectDB()
 
 	validate := validator.New()
+	router := httprouter.New()
 
 	// Activity
 	activityRepository := repository.NewActivityRepository()
 	activityService := service.NewActivityService(activityRepository, db, validate)
 	activityController := controller.NewActivityController(activityService)
+	
+	router.GET("/activity-groups", activityController.FindAll)
+	router.POST("/activity-groups", activityController.Create)
+	router.GET("/activity-groups/:activityId", activityController.FindById)
+	router.PATCH("/activity-groups/:activityId", activityController.Update)
+	router.DELETE("/activity-groups/:activityId", activityController.Delete)
 
 	// Todo
 	todoRepository := repository.NewTodoRepository()
 	todoService := service.NewTodoService(todoRepository, db, validate)
 	todoController := controller.NewTodoController(todoService)
 
-	router := httprouter.New()
-
-	router.GET("/activity_groups", activityController.FindAll)
-	router.POST("/activity_groups", activityController.Create)
-	router.GET("/activity_groups/:activityId", activityController.FindById)
-	router.PATCH("/activity_groups/:activityId", activityController.Update)
-	router.DELETE("/activity_groups/:activityId", activityController.Delete)
-
-	router.GET("/todo_items", todoController.FindAll)
-	router.POST("/todo_items", todoController.Create)
-	router.GET("/todo_items/:todoId", todoController.FindById)
-	router.PATCH("/todo_items/:todoId", todoController.Update)
-	router.DELETE("/todo_items/:todoId", todoController.Delete)
+	router.GET("/todo-items", todoController.FindAll)
+	router.POST("/todo-items", todoController.Create)
+	router.GET("/todo-items/:todoId", todoController.FindById)
+	router.PATCH("/todo-items/:todoId", todoController.Update)
+	router.DELETE("/todo-items/:todoId", todoController.Delete)
 
 	address := fmt.Sprintf("%s:%s", os.Getenv("SERVER_HOST"), os.Getenv("SERVER_PORT"))
 	server := http.Server{

@@ -32,8 +32,8 @@ func (self *ActivityRepositoryImpl) Save(ctx context.Context, tx *sql.Tx, activi
 
 func (self *ActivityRepositoryImpl) Update(ctx context.Context, tx *sql.Tx, activity domain.Activity) domain.Activity {
 	// Update existing activity
-	SQLPut := "UPDATE Activity SET title=?, email=?, updated_at=NOW() WHERE id=?"
-	_, err := tx.ExecContext(ctx, SQLPut, activity.Title, activity.Email, activity.UpdatedAt, activity.Id)
+	SQLPut := "UPDATE Activity SET title=?, email=? WHERE id=?"
+	_, err := tx.ExecContext(ctx, SQLPut, activity.Title, activity.Email, activity.Id)
 	helper.PanicIfError(err)
 
 	// Return updated activity
@@ -44,7 +44,7 @@ func (self *ActivityRepositoryImpl) Update(ctx context.Context, tx *sql.Tx, acti
 
 func (self *ActivityRepositoryImpl) Delete(ctx context.Context, tx *sql.Tx, id int) {
 	// Delete existing activity
-	SQLDel := "UPDATE Activity SET deleted_at=NOW()"	
+	SQLDel := "UPDATE Activity SET deleted_at=NOW() WHERE id=?"	
 	_, err := tx.ExecContext(ctx, SQLDel, id)
 	helper.PanicIfError(err)
 }

@@ -5,7 +5,7 @@ import (
 )
 
 type TodoCreateRequest struct {
-	ActivityGroupId int    `validate:"required"`
+	ActivityGroupId int    `validate:"required" json:"activity_group_id"`
 	Title           string `validate:"required,max=30" json:"title"`
 }
 
