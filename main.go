@@ -1,12 +1,16 @@
 package main
 
 import (
+	"os"
+	"net/http"
+
 	"github.com/go-playground/validator/v10"
 	"github.com/julienschmidt/httprouter"
 
 	"github.com/michaelact/firstApi/repository"
 	"github.com/michaelact/firstApi/controller"
 	"github.com/michaelact/firstApi/service"
+	"github.com/michaelact/firstApi/helper"
 	"github.com/michaelact/firstApi/app"
 )
 
@@ -38,4 +42,13 @@ func main() {
 	router.GET("/todo_items/:todoId", todoController.FindById)
 	router.PATCH("/todo_items/:todoId", todoController.Update)
 	router.DELETE("/todo_items/:todoId", todoController.Delete)
+
+	address := fmt.Sprintf("%s:%s", os.Getenv("SERVER_HOST"), os.Getenv("SERVER_PORT"))
+	server := http.Server{
+		Addr: address, 
+		Handler: router, 
+	}
+
+	err := server.ListenAndServe()
+	helper.PanicIfError(err)
 }
