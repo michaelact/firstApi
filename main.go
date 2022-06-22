@@ -10,6 +10,7 @@ import (
 
 	"github.com/michaelact/firstApi/repository"
 	"github.com/michaelact/firstApi/controller"
+	"github.com/michaelact/firstApi/middleware"
 	"github.com/michaelact/firstApi/exception"
 	"github.com/michaelact/firstApi/service"
 	"github.com/michaelact/firstApi/helper"
@@ -48,7 +49,7 @@ func main() {
 	address := fmt.Sprintf("%s:%s", os.Getenv("SERVER_HOST"), os.Getenv("SERVER_PORT"))
 	server := http.Server{
 		Addr: address, 
-		Handler: router, 
+		Handler: middleware.NewAuthMiddleware(router), 
 	}
 
 	err := server.ListenAndServe()
