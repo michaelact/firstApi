@@ -1,8 +1,8 @@
 package controller
 
 import (
-        "net/http"
-        "github.com/julienschmidt/httprouter"
+	"net/http"
+	"github.com/julienschmidt/httprouter"
 )
 
 type TodoController interface {

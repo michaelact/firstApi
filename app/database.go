@@ -1,12 +1,12 @@
 package app
 
 import (
-		"database/sql"
-		"time"
-		"fmt"
-		"os"
+	"database/sql"
+	"time"
+	"fmt"
+	"os"
 
-		_ "github.com/go-sql-driver/mysql"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 func ConnectDB() *sql.DB {
