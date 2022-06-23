@@ -2,10 +2,11 @@
 
 Cara menjalankan:
 1. [Install Golang](https://go.dev/doc/install)
-2. Pastikan Golang 1.18
-3. Siapkan database MySQL (saya menggunakan versi 8)
-4. Eksekusi file-file `*.sql` dalam folder `database/migrations/*.sql` ke database MySQL
-5. Siapkan environment variable dibawah ini:
+1. Pastikan Golang 1.18
+1. `go get ./...`
+1. Siapkan database MySQL (saya menggunakan versi 8)
+1. Eksekusi file-file `*.sql` dalam folder `database/migrations/*.sql` ke database MySQL
+1. Siapkan environment variable dibawah ini:
    - MYSQL_PORT
    - MYSQL_PASSWORD
    - MYSQL_HOST
@@ -14,7 +15,9 @@ Cara menjalankan:
    - SERVER_PORT
    - SERVER_HOST
    - SERVER_API_KEY
-6. `go run main.go`
+1. [Install Google Wire](https://github.com/google/wire#installing)
+1. `wire`
+1. `go run .`
 
 Referensi:
 - https://documenter.getpostman.com/view/7918444/UVJhEabr

@@ -9,7 +9,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-func ConnectDB() *sql.DB {
+func NewDB() *sql.DB {
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true",
 						os.Getenv("MYSQL_USER"),
 						os.Getenv("MYSQL_PASSWORD"),
