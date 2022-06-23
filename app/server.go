@@ -3,13 +3,13 @@ package app
 import (
 	"net/http"
 	"fmt"
-	"os"
 
+	"github.com/michaelact/firstApi/model/environment"
 	"github.com/michaelact/firstApi/middleware"
 )
 
-func NewServer(middleware *middleware.AuthMiddleware) *http.Server {
-	address := fmt.Sprintf("%s:%s", os.Getenv("SERVER_HOST"), os.Getenv("SERVER_PORT"))
+func NewServer(middleware *middleware.AuthMiddleware, c *environment.Global) *http.Server {
+	address := fmt.Sprintf("%s:%s", c.Server.Host, c.Server.Port)
 	return &http.Server{
 		Addr:    address, 
 		Handler: middleware, 
