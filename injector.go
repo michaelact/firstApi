@@ -16,12 +16,14 @@ import (
 	"github.com/michaelact/firstApi/controller"
 	"github.com/michaelact/firstApi/repository"
 	"github.com/michaelact/firstApi/service"
+	"github.com/michaelact/firstApi/config"
 	"github.com/michaelact/firstApi/app"
 )
 
 func InitializeServer() *http.Server {
 	wire.Build(
 		// Back
+		config.NewConfig, 
 		app.NewDB, 
 		validator.New, 
 
