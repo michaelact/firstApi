@@ -14,9 +14,10 @@ Cara menjalankan:
    - MYSQL_DATABASE
    - SERVER_PORT
    - SERVER_HOST
-   - SERVER_API_KEY
-1. [Install Google Wire](https://github.com/google/wire#installing)
-1. `wire`
+   - API_KEY
+   - LOG_LEVEL [List](https://github.com/rs/zerolog/blob/master/log.go#L112-L133)
+   - LOG_OUTPUT [stdout | file]
+   - LOG_OUTPUT_FILE
 1. `go run .`
 
 Referensi:
