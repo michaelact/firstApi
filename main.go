@@ -9,14 +9,13 @@ import (
 	"github.com/michaelact/firstApi/repository"
 	"github.com/michaelact/firstApi/util/log"
 	"github.com/michaelact/firstApi/service"
-	"github.com/michaelact/firstApi/config"
 	"github.com/michaelact/firstApi/helper"
 	"github.com/michaelact/firstApi/app"
 	
 )
 
 func InitializeServer() *http.Server {
-	conf := config.NewConfig()
+	conf := app.NewConfig()
 	db := app.NewDB(conf)
 	validate := validator.New()
 

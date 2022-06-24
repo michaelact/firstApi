@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/michaelact/firstApi/helper"
-	"github.com/michaelact/firstApi/model/environment"
+	"github.com/michaelact/firstApi/model/config"
 )
 
 type AuthMiddleware struct {
@@ -12,7 +12,7 @@ type AuthMiddleware struct {
 	Key     string
 }
 
-func NewAuthMiddleware(handler http.Handler, c *environment.Global) *AuthMiddleware {
+func NewAuthMiddleware(handler http.Handler, c *config.Global) *AuthMiddleware {
 	return &AuthMiddleware{
 		Handler: handler, 
 		Key:     c.Api.Key, 

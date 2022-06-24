@@ -7,10 +7,10 @@ import (
 
 	_ "github.com/go-sql-driver/mysql"
 
-	"github.com/michaelact/firstApi/model/environment"
+	"github.com/michaelact/firstApi/model/config"
 )
 
-func NewDB(c *environment.Global) *sql.DB {
+func NewDB(c *config.Global) *sql.DB {
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true",
 						c.Database.User,
 						c.Database.Password,

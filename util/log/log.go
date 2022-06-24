@@ -5,10 +5,10 @@ import (
 
 	"github.com/rs/zerolog"
 
-	"github.com/michaelact/firstApi/model/environment"
+	"github.com/michaelact/firstApi/model/config"
 )
 
-func NewLogger(c *environment.Global) *zerolog.Logger { 
+func NewLogger(c *config.Global) *zerolog.Logger { 
 	var logger zerolog.Logger
 	logger = zerolog.New(os.Stdout)
 	logger.Level(c.Log.Level)
