@@ -29,7 +29,5 @@ type Database struct {
 }
 
 type Log struct {
-    Level      zerolog.Level `env:"LOG_LEVEL,required"`
-    Output     string        `env:"LOG_OUTPUT,required"`
-    OutputFile string        `env:"LOG_OUTPUT_FILE"`
+    Level zerolog.Level `env:"LOG_LEVEL,required"`
 }

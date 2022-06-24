@@ -16,8 +16,6 @@ Cara menjalankan:
    - SERVER_HOST
    - API_KEY
    - LOG_LEVEL [List](https://github.com/rs/zerolog/blob/master/log.go#L112-L133)
-   - LOG_OUTPUT [stdout | file]
-   - LOG_OUTPUT_FILE
 1. `go run .`
 
 Referensi:
