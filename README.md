@@ -7,11 +7,11 @@ Cara menjalankan:
 1. Siapkan database MySQL (saya menggunakan versi 8)
 1. Eksekusi file-file `*.sql` dalam folder `database/migrations/*.sql` ke database MySQL
 1. Siapkan environment variable dibawah ini:
-   - MYSQL_PORT
-   - MYSQL_PASSWORD
-   - MYSQL_HOST
-   - MYSQL_USER
-   - MYSQL_DATABASE
+   - DATABASE_PORT
+   - DATABASE_PASSWORD
+   - DATABASE_HOST
+   - DATABASE_USER
+   - DATABASE_NAME
    - SERVER_PORT
    - SERVER_HOST
    - API_KEY
